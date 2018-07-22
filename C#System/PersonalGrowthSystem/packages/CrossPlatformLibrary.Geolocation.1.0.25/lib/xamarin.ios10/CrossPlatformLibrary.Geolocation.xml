@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CrossPlatformLibrary.Geolocation</name>
+    </assembly>
+    <members>
+        <member name="P:CrossPlatformLibrary.Geolocation.ILocationService.DesiredAccuracy">
+            <summary>
+            Desired accuracy in meteres.
+            The better accuracy (=the lower values), the longer it takes until the GPS sensor returns a position.
+            </summary>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.ILocationService.IsGeolocationAvailable">
+            <summary>
+            Indicates if the geolocation service is available on this device.
+            </summary>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.ILocationService.IsGeolocationEnabled">
+            <summary>
+            Indicates if the geolocation service is enabled on this device.
+            </summary>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.ILocationService.GetPositionAsync(System.Int32,System.Nullable{System.Threading.CancellationToken},System.Boolean)">
+            <summary>
+            Gets position async with specified parameters
+            </summary>
+            <param name="timeoutMilliseconds">Timeout in milliseconds to wait, Default Infinite</param>
+            <param name="token">Cancelation token</param>
+            <param name="includeHeading">If you would like to include heading</param>
+            <returns>Position</returns>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">Thrown when the request times out.</exception>
+            <exception cref="T:CrossPlatformLibrary.Geolocation.Exceptions.GeolocationPositionUnavailableException">Thrown when no valid GPS position could be found.</exception>
+            <exception cref="T:CrossPlatformLibrary.Geolocation.Exceptions.GeolocationUnauthorizedException">Thrown when the application has no permissions to use the GPS service.</exception>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.ILocationService.StartListening(System.Int32,System.Double,System.Boolean)">
+            <summary>
+            Starts listening for GPS position updates.
+            </summary>
+            <param name="minTime"></param>
+            <param name="minDistance"></param>
+            <param name="includeHeading"></param>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.ILocationService.StopListening">
+            <summary>
+            Stops listening for GPS position updates.
+            </summary>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.ILocationServiceSettings.Show">
+            <summary>
+                Navigates to the location service settings of the device.
+            </summary>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.Position.Altitude">
+            <summary>
+                Gets or sets the altitude in meters relative to sea level.
+            </summary>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.Position.Accuracy">
+            <summary>
+                Gets or sets the potential position error radius in meters.
+            </summary>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.Position.AltitudeAccuracy">
+            <summary>
+                Gets or sets the potential altitude error range in meters.
+            </summary>
+            <remarks>
+                Not supported on Android, will always read 0.
+            </remarks>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.Position.Heading">
+            <summary>
+                Gets or sets the heading in degrees relative to true North.
+            </summary>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.Position.Speed">
+            <summary>
+                Gets or sets the speed in meters per second.
+            </summary>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.PositionExtensions.GetLongestRadiusFromCenter(System.Collections.Generic.IEnumerable{CrossPlatformLibrary.Geolocation.Position},CrossPlatformLibrary.Geolocation.Position,System.Double)">
+            <summary>
+                Gets the longest radius from center.
+            </summary>
+            <param name="coordinates">The coordinates.</param>
+            <param name="centerCoordinate">The center coordinate.</param>
+            <param name="zoomLevel">The zoom level.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.PositionExtensions.GetAccuracyRadius(CrossPlatformLibrary.Geolocation.Position,System.Double)">
+            <summary>
+                Gets the accuracy radius in pixels.
+                http://developer.nokia.com/resources/library/Lumia/change-history/archived-content/maps-and-navigation/guide-to-the-wp8-maps-api.html
+            </summary>
+            <param name="coordinate">The coordinate.</param>
+            <param name="zoomLevel">The zoom level.</param>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.PositionExtensions.WithRandomOffset(CrossPlatformLibrary.Geolocation.Position)">
+            <summary>
+                Add some meters of offset to the given Position.
+            </summary>
+            <param name="coordinate">The coordinate.</param>
+            <returns>The new Position.</returns>
+        </member>
+    </members>
+</doc>

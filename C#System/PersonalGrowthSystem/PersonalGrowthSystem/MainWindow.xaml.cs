@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalGrowthSystem.Src.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace PersonalGrowthSystem
         public MainWindow()
         {
             InitializeComponent();
+            GoogleCalendar.LoadCredential();
+            GoogleCalendar.Report(DateTime.Now, "Test");
+
+            ScreenShot.ShotAll(null);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SettingWindow window = new SettingWindow();
+            window.ShowDialog();
         }
     }
 }

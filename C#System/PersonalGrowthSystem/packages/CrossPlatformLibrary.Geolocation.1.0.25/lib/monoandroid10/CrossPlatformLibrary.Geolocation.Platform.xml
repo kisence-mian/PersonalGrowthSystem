@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CrossPlatformLibrary.Geolocation.Platform</name>
+    </assembly>
+    <members>
+        <member name="F:CrossPlatformLibrary.Geolocation.DateTimeExtensions.Epoch">
+            <summary>
+            Epoch is a UTC DateTime value from January 1, 1970.
+            </summary>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.DateTimeExtensions.GetTimestamp(System.Int64)">
+            <summary>
+            Returns a DateTimeOffset which is Epoch + time.
+            </summary>
+            <param name="time">Time value in milliseconds (starting on January 1, 1970).</param>
+        </member>
+        <member name="E:CrossPlatformLibrary.Geolocation.LocationService.PositionError">
+            <inheritdoc/>
+        </member>
+        <member name="E:CrossPlatformLibrary.Geolocation.LocationService.PositionChanged">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.LocationService.IsListening">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.LocationService.DesiredAccuracy">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.LocationService.SupportsHeading">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.LocationService.IsGeolocationAvailable">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrossPlatformLibrary.Geolocation.LocationService.IsGeolocationEnabled">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.LocationService.GetPositionAsync(System.Int32,System.Nullable{System.Threading.CancellationToken},System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.LocationService.StartListening(System.Int32,System.Double,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrossPlatformLibrary.Geolocation.LocationService.StopListening">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
