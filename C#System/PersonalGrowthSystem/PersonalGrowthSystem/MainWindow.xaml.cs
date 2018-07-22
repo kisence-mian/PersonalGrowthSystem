@@ -27,7 +27,7 @@ namespace PersonalGrowthSystem
             GoogleCalendar.LoadCredential();
             GoogleCalendar.Report(DateTime.Now, "Test");
 
-            ScreenShot.ShotAll(null);
+            ScreenShot.ShotAll(".\\ScreenShot");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
