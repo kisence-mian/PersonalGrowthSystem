@@ -33,6 +33,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Custom</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrossPlatformLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CrossPlatformLibrary.1.0.73\lib\net45\CrossPlatformLibrary.dll</HintPath>
@@ -109,7 +118,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Src\Config\Config.cs" />
+    <Compile Include="Src\Config\ConfigData.cs" />
+    <Compile Include="Src\Define\Const.cs" />
     <Compile Include="Src\GoogleCalendar\GoogleCalendar.cs" />
+    <Compile Include="Src\GoogleCalendar\GoogleCalendarConfig.cs" />
+    <Compile Include="Src\RecordTime\RecordTime.cs" />
     <Compile Include="Src\UI\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
@@ -118,7 +132,9 @@
     <Compile Include="Src\Util\FileTool.cs" />
     <Compile Include="Src\Util\MiniJSON.cs" />
     <Compile Include="Src\Util\PathTool.cs" />
+    <Compile Include="Src\Util\PermissionTool.cs" />
     <Compile Include="Src\Util\RecordManager.cs" />
+    <Compile Include="Src\Util\RegistryTool.cs" />
     <Compile Include="Src\Util\ScreenShot.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +172,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -166,6 +183,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Src\Application\SplashScreen1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Res\Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

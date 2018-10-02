@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:PersonalGrowthSystem.Src.UI"
         mc:Ignorable="d"
         Title="设置" Height="300" Width="328.272">
-    <Grid>
+    <Grid x:Name="Grid_Window" >
         <Label Content="Google日历密钥" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
-        <TextBox Height="21" Margin="115,12,85,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <Button Content="选择" Margin="240,14,5,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Text_Path" Height="21" Margin="115,12,85,0" TextWrapping="Wrap" Text="{Binding Path=CredentialsPath, Mode=TwoWay}" VerticalAlignment="Top"/>
+        <Button Content="选择" Margin="240,14,5,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <CheckBox Content="开机启动" Checked="CheckBox_Checked" IsChecked="{Binding Path=IsStartRun, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -22,6 +22,31 @@ namespace PersonalGrowthSystem.Src.UI
         public SettingWindow()
         {
             InitializeComponent();
+
+            ConfigData cData = Config.GetConfig<ConfigData>();
+            GoogleCalendarConfig gData = Config.GetConfig<GoogleCalendarConfig>();
+
+            DataContext = cData;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog()
+            {
+                Filter = "APK Files (*.json)|*.json"
+            };
+            var result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                this.Text_Path.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+
+            RegistryTool.SelfRunning(cb.IsChecked ?? true, PathTool.GetApplicationName(), PathTool.GetCurrentPath());
         }
     }
 }

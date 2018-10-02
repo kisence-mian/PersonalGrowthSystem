@@ -15,8 +15,6 @@ using System.Windows;
 
 public class GoogleCalendar
 {
-    public const string c_recordName = "GoogleCalendar"; 
-
     static string[] Scopes = { CalendarService.Scope.Calendar };
     static string ApplicationName = "PersonalGrowthSystem";//PersonalGrowthSystem
 
@@ -25,7 +23,9 @@ public class GoogleCalendar
 
     public static string GetCredentialPath()
     {
-        return RecordManager.GetRecord(c_recordName, "GoogleCalendar", "Config/credentials.json");
+        return RecordManager.GetRecord(
+            Const.GoogleCalendarConfig, 
+            Const.Google_CredentialsPath, "Config/credentials.json");
     }
 
     public static void LoadCredential()
@@ -63,7 +63,7 @@ public class GoogleCalendar
         }
     }
 
-    public static void Report(DateTime date,string name)
+    public static void Report(DateTime date,string name,int minutes)
     {
         if(service != null)
         {
@@ -71,16 +71,16 @@ public class GoogleCalendar
             {
                 Event e = new Event();
                 e.Summary = name;
-                e.Location = RecordManager.GetRecord(c_recordName, "Position", "成都 慕合南道小区");
+                e.Location = RecordManager.GetRecord(Const.GoogleCalendarConfig, Const.Google_Location, "XXX");
 
                 EventDateTime start = new EventDateTime();
                 start.DateTime = date;
-                start.TimeZone = "Asia/Shanghai";//TimeZoneInfo.Local.StandardName;
+                start.TimeZone = RecordManager.GetRecord(Const.GoogleCalendarConfig, Const.Google_TimeZone, "Asia/Shanghai");
                 e.Start = start;
 
                 EventDateTime end = new EventDateTime();
-                end.DateTime = date.AddMinutes(100);
-                end.TimeZone = "Asia/Shanghai";
+                end.DateTime = date.AddMinutes(minutes);
+                end.TimeZone = RecordManager.GetRecord(Const.GoogleCalendarConfig, Const.Google_TimeZone, "Asia/Shanghai");
                 e.End = end;
 
                 String calendarId = "primary";
@@ -93,7 +93,7 @@ public class GoogleCalendar
         }
         else
         {
-
+            MessageBox.Show("Google 服务未启动");
         }
     }
 
