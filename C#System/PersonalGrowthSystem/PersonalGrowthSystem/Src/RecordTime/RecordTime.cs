@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalGrowthSystem;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Forms;
 
 public class RecordTime
 {
@@ -19,18 +21,19 @@ public class RecordTime
     //每10分钟执行一次
     public void TimerTask(object source, ElapsedEventArgs e)
     {
-        string processes = GetCurrentProcesses();
+        Process processes = GetCurrentProcesses();
 
-        GoogleCalendar.Report(DateTime.Now, processes, processes, 10);
+        GoogleCalendar.Report(DateTime.Now, processes.ProcessName, processes.MainWindowTitle, 10);
 
         //屏幕截屏
         ScreenShot.ShotAll(".\\ScreenShot");
+
+        MainWindow.Notify("已上报 ->" + processes.ProcessName, 1000);
     }
 
-    string GetCurrentProcesses()
+    #region 分析进程
+    Process GetCurrentProcesses()
     {
-        string content = "";
-
         int id = GetForegroundWindow().ToInt32();
 
         Process[] ps = Process.GetProcesses();
@@ -41,7 +44,7 @@ public class RecordTime
             {
                 if(p.MainWindowHandle.ToInt32() == id)
                 {
-                    content += p.ProcessName + " -> " + p.MainWindowTitle + "\n";
+                    return p;
                 }
             }
             catch (Exception e)
@@ -50,12 +53,11 @@ public class RecordTime
             }
         }
 
-        MessageBox.Show(content);
-
-        return content;
-
+        return null;
     }
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     private static extern IntPtr GetForegroundWindow();
+
+    #endregion
 }

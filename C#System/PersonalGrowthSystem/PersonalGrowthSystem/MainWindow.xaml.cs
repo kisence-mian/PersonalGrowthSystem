@@ -25,20 +25,15 @@ namespace PersonalGrowthSystem
     {
         WindowState ws;
         WindowState wsl;
-        NotifyIcon notifyIcon;
+        static public NotifyIcon notifyIcon;
 
         public MainWindow()
         {
-            //if(!PermissionTool.QP())
-            //{
-            //    return;
-            //}
-
             InitializeComponent();
 
-            TimeRecord();
+            InitIcon();
 
-            Icon();
+            TimeRecord();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,18 +44,29 @@ namespace PersonalGrowthSystem
 
         #region 任务栏小图标
 
-        private void Icon()
+        /// <summary>
+        /// 任务栏通知
+        /// </summary>
+        /// <param name="description">内容</param>
+        /// <param name="time">时间 单位是毫秒</param>
+        public static void Notify(string description,int time)
+        {
+            MainWindow.notifyIcon.BalloonTipText = description;  //设置程序启动时显示的文本
+            MainWindow.notifyIcon.ShowBalloonTip(time);
+        }
+
+        private void InitIcon()
         {
             //保证窗体显示在上方。
             wsl = WindowState;
 
-            this.notifyIcon = new NotifyIcon();
-            this.notifyIcon.BalloonTipText = "个人成长系统已启动";  //设置程序启动时显示的文本
-            this.notifyIcon.Text = "个人成长系统";                  //最小化到托盘时，鼠标点击时显示的文本
-            this.notifyIcon.Icon = new System.Drawing.Icon("Res/Icon.ico");//程序图标
-            this.notifyIcon.Visible = true;
+            notifyIcon = new NotifyIcon();
+            notifyIcon.BalloonTipText = "个人成长系统已启动";  //设置程序启动时显示的文本
+            notifyIcon.Text = "个人成长系统";                  //最小化到托盘时，鼠标点击时显示的文本
+            notifyIcon.Icon = new System.Drawing.Icon("Res/Icon.ico");//程序图标
+            notifyIcon.Visible = true;
             notifyIcon.MouseDoubleClick += OnNotifyIconDoubleClick;
-            this.notifyIcon.ShowBalloonTip(1000);
+            notifyIcon.ShowBalloonTip(1000);
         }
 
         private void OnNotifyIconDoubleClick(object sender, EventArgs e)

@@ -19,12 +19,13 @@ namespace PersonalGrowthSystem.Src.UI
     /// </summary>
     public partial class SettingWindow : Window
     {
+        ConfigData cData;
+
         public SettingWindow()
         {
             InitializeComponent();
 
-            ConfigData cData = Config.GetConfig<ConfigData>();
-            //GoogleCalendarConfig gData = Config.GetConfig<GoogleCalendarConfig>();
+            cData = Config.GetConfig<ConfigData>();
 
             DataContext = cData;
         }
@@ -42,11 +43,29 @@ namespace PersonalGrowthSystem.Src.UI
             }
         }
 
+        #region 开机启动
+
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
 
-            RegistryTool.SelfRunning(cb.IsChecked ?? true, PathTool.GetApplicationName(), PathTool.GetCurrentPath());
+            bool result = cb.IsChecked ?? false;
+
+            if(result != cData.IsStartRun)
+            {
+                if (!PermissionTool.IsAdministrator())
+                {
+                    MessageBox.Show("请以管理员权限运行再设置开机启动");
+                    return;
+                }
+                else
+                {
+                    RegistryTool.SelfRunning(cb.IsChecked ?? true, PathTool.GetApplicationName(), PathTool.GetCurrentPath());
+                    cData.IsStartRun = result;
+                }
+            }
         }
+
+        #endregion
     }
 }
