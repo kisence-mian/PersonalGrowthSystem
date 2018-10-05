@@ -51,6 +51,8 @@ namespace PersonalGrowthSystem.Src.UI
 
             bool result = cb.IsChecked ?? false;
 
+            MessageBox.Show("result ->" + result);
+
             if(result != cData.IsStartRun)
             {
                 if (!PermissionTool.IsAdministrator())

@@ -12,7 +12,14 @@
             <TabItem Header="常规">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
 
-                    <CheckBox Content="开机启动" Checked="CheckBox_Checked" IsChecked="{Binding Path=IsStartRun, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" Height="15" VerticalAlignment="Top"/>
+                    <CheckBox Content="开机启动" 
+                              HorizontalAlignment="Left" 
+                              Margin="10,10,0,0" 
+                              Height="15"
+                              VerticalAlignment="Top" 
+                              Checked="CheckBox_Checked" 
+                              Unchecked="CheckBox_Checked"
+                              />
 
 
                 </Grid>
