@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 public static class PathTool
 {
-    public static string GetCurrentPath()
+    public static string GetStartupPath()
     {
-        return System.IO.Directory.GetCurrentDirectory();
+        return Application.StartupPath;
     }
 
     public static string GetFullPath()

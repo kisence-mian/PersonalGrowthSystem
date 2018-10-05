@@ -47,13 +47,15 @@ public static class RegistryTool
     ///path--应用程序路径
     public static bool SelfRunning(bool isStart, string exeName, string path)
     {
+        path = path.Replace('/', '\\');
+
         try
         {
             RegistryKey local = Registry.LocalMachine;
             RegistryKey key = local.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
             if (key == null)
             {
-                local.CreateSubKey("SOFTWARE//Microsoft//Windows//CurrentVersion//Run");
+                local.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
             }
             if (isStart)//若开机自启动则添加键值对
             {

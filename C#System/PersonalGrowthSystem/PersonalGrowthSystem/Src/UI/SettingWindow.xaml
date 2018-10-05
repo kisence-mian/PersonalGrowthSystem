@@ -19,6 +19,7 @@
                               VerticalAlignment="Top" 
                               Checked="CheckBox_Checked" 
                               Unchecked="CheckBox_Checked"
+                              IsChecked="{Binding Path=IsStartRun, Mode=OneTime}"
                               />
 
 
@@ -27,11 +28,15 @@
             <TabItem Header="上报设置">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Google日历密钥" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="Text_Path" Height="21" Margin="115,12,85,0" TextWrapping="Wrap" Text="{Binding Path=CredentialsPath, Mode=TwoWay}" VerticalAlignment="Top"/>
+                    <TextBox x:Name="Text_Path" Height="21" Margin="115,12,85,0" TextWrapping="NoWrap" Text="{Binding Path=CredentialsPath, Mode=TwoWay}" VerticalAlignment="Top"/>
                     <Button Content="选择" Margin="0,14,5,0" VerticalAlignment="Top" Click="Button_Click" HorizontalAlignment="Right" Width="75"/>
 
-                    <Label Content="当前地址" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="Text_Path2" Height="21" Margin="115,42,85,0" TextWrapping="Wrap" Text="{Binding Path=Location, Mode=TwoWay}" VerticalAlignment="Top"/>
+                    <Label Content="当前位置" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="Text_LocalPosition" Height="21" Margin="115,42,85,0" TextWrapping="NoWrap" Text="{Binding Path=Location, Mode=TwoWay}" VerticalAlignment="Top"/>
+                    
+                    <Label Content="截图存放路径" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="Text_ShotPath" Height="21" Margin="115,72,85,0" TextWrapping="NoWrap" Text="{Binding Path=ScreenShotPath, Mode=TwoWay}" VerticalAlignment="Top"/>
+                    <Button Content="选择" Margin="0,72,5,0" VerticalAlignment="Top" Click="Button_ScreenShotClick" HorizontalAlignment="Right" Width="75"/>
 
                 </Grid>
             </TabItem>

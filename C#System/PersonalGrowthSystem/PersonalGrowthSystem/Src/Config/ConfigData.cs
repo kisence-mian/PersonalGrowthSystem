@@ -11,6 +11,7 @@ public class ConfigData
     public string shotPosition;
     public string location;
     public string credentialsPath;
+    public string screenShotPath;
 
     public bool IsStartRun
     {
@@ -50,6 +51,17 @@ public class ConfigData
             RecordManager.GetRecord(
             Const.GoogleCalendarConfig,
             Const.Google_CredentialsPath, credentialsPath);
+            Save();
+        }
+    }
+
+    public string ScreenShotPath
+
+    { get => screenShotPath;
+        set
+        {
+            screenShotPath = value;
+            RecordManager.SaveRecord(Const.ConfigFile, Const.Config_ShotPosition, screenShotPath);
             Save();
         }
     }

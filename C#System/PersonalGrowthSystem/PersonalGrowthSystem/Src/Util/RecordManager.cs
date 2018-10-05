@@ -162,7 +162,7 @@ using System.Windows;
 
         static string GetSavePath(string recordName)
         {
-            string path = PathTool.GetCurrentPath() + "\\" + c_directoryName + "\\" + recordName + ".json";
+            string path = PathTool.GetStartupPath() + "\\" + c_directoryName + "\\" + recordName + ".json";
             return path;
         }
 

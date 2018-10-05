@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,8 +52,6 @@ namespace PersonalGrowthSystem.Src.UI
 
             bool result = cb.IsChecked ?? false;
 
-            MessageBox.Show("result ->" + result);
-
             if(result != cData.IsStartRun)
             {
                 if (!PermissionTool.IsAdministrator())
@@ -62,12 +61,24 @@ namespace PersonalGrowthSystem.Src.UI
                 }
                 else
                 {
-                    RegistryTool.SelfRunning(cb.IsChecked ?? true, PathTool.GetApplicationName(), PathTool.GetCurrentPath());
+                    RegistryTool.SelfRunning(cb.IsChecked ?? true, "PersonalGrowthSystem", PathTool.GetFullPath());
                     cData.IsStartRun = result;
                 }
             }
         }
 
         #endregion
+
+        private void Button_ScreenShotClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            CommonFileDialogResult result = dialog.ShowDialog();
+
+            if (result == CommonFileDialogResult.Ok)
+            {
+                this.Text_ShotPath.Text = dialog.FileName;
+            }
+        }
     }
 }

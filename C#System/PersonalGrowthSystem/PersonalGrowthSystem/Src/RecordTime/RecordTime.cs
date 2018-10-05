@@ -34,7 +34,7 @@ public class RecordTime
         }
 
         //屏幕截屏
-        ScreenShot.ShotAll(".\\ScreenShot");
+        ScreenShot.ShotAll(RecordManager.GetRecord(Const.ConfigFile, Const.Config_ShotPosition, ".\\ScreenShot"));
 
 
     }

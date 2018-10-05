@@ -70,7 +70,7 @@ namespace PersonalGrowthSystem
             notifyIcon = new NotifyIcon();
             notifyIcon.BalloonTipText = "个人成长系统已启动";  //设置程序启动时显示的文本
             notifyIcon.Text = "个人成长系统";                  //最小化到托盘时，鼠标点击时显示的文本
-            notifyIcon.Icon = new System.Drawing.Icon("Res/Icon.ico");//程序图标
+            notifyIcon.Icon = new System.Drawing.Icon(PathTool.GetStartupPath() + "/Res/Icon.ico");//程序图标
             notifyIcon.Visible = true;
             notifyIcon.MouseDoubleClick += OnNotifyIconDoubleClick;
             notifyIcon.ShowBalloonTip(1000);

@@ -61,3 +61,5 @@ G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSyst
 G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\obj\Debug\PersonalGrowthSystem.application
 G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\obj\Debug\PersonalGrowthSystem_Content.g.cs
 G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\bin\Debug\Res\Icon.ico
+G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\bin\Debug\Microsoft.WindowsAPICodePack.dll
+G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
