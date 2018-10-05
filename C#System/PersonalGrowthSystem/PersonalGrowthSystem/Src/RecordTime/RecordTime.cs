@@ -23,12 +23,20 @@ public class RecordTime
     {
         Process processes = GetCurrentProcesses();
 
-        GoogleCalendar.Report(DateTime.Now, processes.ProcessName, processes.MainWindowTitle, 10);
+        if(processes != null)
+        {
+            GoogleCalendar.Report(DateTime.Now, processes.ProcessName, processes.MainWindowTitle, 10);
+            MainWindow.Notify("已上报 ->" + processes.ProcessName, 1000);
+        }
+        else
+        {
+            GoogleCalendar.Report(DateTime.Now, "无活跃程序", "", 10);
+        }
 
         //屏幕截屏
         ScreenShot.ShotAll(".\\ScreenShot");
 
-        MainWindow.Notify("已上报 ->" + processes.ProcessName, 1000);
+
     }
 
     #region 分析进程

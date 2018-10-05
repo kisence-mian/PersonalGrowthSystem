@@ -29,11 +29,18 @@ namespace PersonalGrowthSystem
 
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            InitIcon();
+                InitIcon();
 
-            TimeRecord();
+                TimeRecord();
+            }
+            catch(Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
