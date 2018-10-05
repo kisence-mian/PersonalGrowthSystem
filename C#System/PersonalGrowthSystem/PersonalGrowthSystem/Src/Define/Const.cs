@@ -15,4 +15,6 @@ public class Const
     public const string Google_CredentialsPath = "CredentialsPath";
     public const string Google_Location = "Location";
     public const string Google_TimeZone = "TimeZone";
+
+    public const string EventColorConfig = "EventColor";
 }

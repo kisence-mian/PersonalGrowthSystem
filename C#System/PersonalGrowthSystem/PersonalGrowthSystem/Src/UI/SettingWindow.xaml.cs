@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -21,6 +22,7 @@ namespace PersonalGrowthSystem.Src.UI
     public partial class SettingWindow : Window
     {
         ConfigData cData;
+        RecordData eventColor;
 
         public SettingWindow()
         {
@@ -29,6 +31,56 @@ namespace PersonalGrowthSystem.Src.UI
             cData = Config.GetConfig<ConfigData>();
 
             DataContext = cData;
+
+            eventColor = RecordManager.GetRecordData(Const.EventColorConfig);
+
+            RecordManager.SaveRecord(Const.EventColorConfig, "dev", "0");
+            RecordManager.SaveRecord(Const.EventColorConfig, "apk", "1");
+            RecordManager.SaveRecord(Const.EventColorConfig, "steam", "2");
+
+            List_EventColor.ItemsSource = eventColor;
+            //List_EventColor.DisplayMemberPath = "Value";
+            //List_EventColor.SelectedValuePath = "Key";
+        }
+
+        #region 开机启动
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.CheckBox cb = sender as System.Windows.Controls.CheckBox;
+
+            bool result = cb.IsChecked ?? false;
+
+            if(result != cData.IsStartRun)
+            {
+                if (!PermissionTool.IsAdministrator())
+                {
+                    System.Windows.MessageBox.Show("请以管理员权限运行再设置开机启动");
+                    return;
+                }
+                else
+                {
+                    RegistryTool.SelfRunning(cb.IsChecked ?? true, "PersonalGrowthSystem", PathTool.GetFullPath());
+                    cData.IsStartRun = result;
+                }
+            }
+        }
+
+        #endregion
+
+        #region 路径选择按钮
+
+        private void Button_ScreenShotClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            CommonFileDialogResult result = dialog.ShowDialog();
+
+            if (result == CommonFileDialogResult.Ok)
+            {
+                this.Text_ShotPath.Text = dialog.FileName;
+                cData.ShotPosition = this.Text_ShotPath.Text;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -45,42 +97,31 @@ namespace PersonalGrowthSystem.Src.UI
             }
         }
 
-        #region 开机启动
+        #endregion
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        #region 编辑事件颜色
+
+        private void Button_Click_DeleteEventColor(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = sender as CheckBox;
+            System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
+            string key = (string)btn.Tag;
 
-            bool result = cb.IsChecked ?? false;
+            eventColor.Remove(key);
+            RecordManager.SaveRecordData(Const.EventColorConfig, eventColor);
+        }
 
-            if(result != cData.IsStartRun)
+        private void Button_Click_AddEventColor(object sender, RoutedEventArgs e)
+        {
+            if(Text_EventKey.Text != "" && Text_EventColor.Text != "")
             {
-                if (!PermissionTool.IsAdministrator())
-                {
-                    MessageBox.Show("请以管理员权限运行再设置开机启动");
-                    return;
-                }
-                else
-                {
-                    RegistryTool.SelfRunning(cb.IsChecked ?? true, "PersonalGrowthSystem", PathTool.GetFullPath());
-                    cData.IsStartRun = result;
-                }
+                eventColor.Add(Text_EventKey.Text, Text_EventColor.Text);
+                RecordManager.SaveRecordData(Const.EventColorConfig, eventColor);
+
+                Text_EventKey.Text = "";
+                Text_EventColor.Text = "";
             }
         }
 
         #endregion
-
-        private void Button_ScreenShotClick(object sender, RoutedEventArgs e)
-        {
-            var dialog = new CommonOpenFileDialog();
-            dialog.IsFolderPicker = true;
-            CommonFileDialogResult result = dialog.ShowDialog();
-
-            if (result == CommonFileDialogResult.Ok)
-            {
-                this.Text_ShotPath.Text = dialog.FileName;
-                cData.ShotPosition = this.Text_ShotPath.Text;
-            }
-        }
     }
 }

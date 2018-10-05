@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,12 @@ using System.Windows;
 
         #region 取值
 
-        public static string GetRecord(string recordName,string key, string defaultValue)
+    public static RecordData GetRecordData(string recordName)
+    {
+        return GetRecord(recordName);
+    }
+
+    public static string GetRecord(string recordName,string key, string defaultValue)
         {
             RecordData data = GetRecord(recordName);
 
@@ -74,11 +80,17 @@ using System.Windows;
             }
         }
 
-        #endregion
+    #endregion
 
         #region 存值
 
-        public static void SaveRecord(string recordName, string key, string value)
+    public static void SaveRecordData(string recordName, RecordData record)
+    {
+        record.Change();
+        SaveData(recordName, record);
+    }
+
+    public static void SaveRecord(string recordName, string key, string value)
         {
             RecordData data = GetRecord(recordName);
 
@@ -125,7 +137,6 @@ using System.Windows;
             {
                 data = LoadData(recordName);
                 m_cache.Add(recordName, data);
-                
             }
 
             return data;
@@ -171,9 +182,14 @@ using System.Windows;
 
     #region 声明
     [Serializable]
-    public class RecordData : Dictionary<string,string>
+    public class RecordData : Dictionary<string, string>, INotifyCollectionChanged
     {
-
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public void Change()
+        {
+            NotifyCollectionChangedEventArgs e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+            CollectionChanged(this, e);
+        }
     }
 
     #endregion

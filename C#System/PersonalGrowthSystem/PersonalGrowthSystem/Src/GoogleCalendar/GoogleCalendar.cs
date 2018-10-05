@@ -63,6 +63,8 @@ public class GoogleCalendar
                 });
 
                 isInit = true;
+
+                Colors colors = service.Colors.Get().Execute();
             }
         }
         catch(Exception e)
@@ -71,7 +73,7 @@ public class GoogleCalendar
         }
     }
 
-    public static void Report(DateTime date,string name,string description ,int minutes)
+    public static void Report(DateTime date,string name,string description,int minutes,string colorID = "0")
     {
         LoadCredential();
 
@@ -82,11 +84,10 @@ public class GoogleCalendar
                 Colors cs = new Colors();
                 ColorDefinition c = new ColorDefinition();
 
-                
                 Event e = new Event();
                 e.Summary = name;
                 e.Description = description;
-                //e.ColorId = color;
+                e.ColorId = colorID;
 
                 e.Location = RecordManager.GetRecord(Const.GoogleCalendarConfig, Const.Google_Location, "XXX");
 

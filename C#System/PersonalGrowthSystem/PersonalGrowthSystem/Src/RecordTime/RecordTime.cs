@@ -14,8 +14,7 @@ public class RecordTime
     public RecordTime()
     {
         GoogleCalendar.LoadCredential();
-
-        GoogleCalendar.Report(DateTime.Now, "程序启动", "", 1);
+        GoogleCalendar.Report(DateTime.Now, "程序启动", "5", 1);
     }
 
     //每10分钟执行一次
@@ -25,7 +24,7 @@ public class RecordTime
 
         if(processes != null)
         {
-            GoogleCalendar.Report(DateTime.Now, processes.ProcessName, processes.MainWindowTitle, 10);
+            GoogleCalendar.Report(DateTime.Now, processes.ProcessName, processes.MainWindowTitle, 10,GetEventColor(processes.ProcessName));
             MainWindow.Notify("已上报 ->" + processes.ProcessName, 1000);
         }
         else
@@ -64,6 +63,15 @@ public class RecordTime
 
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     private static extern IntPtr GetForegroundWindow();
+
+    #endregion
+
+    #region 上报颜色
+
+    string GetEventColor(string processesName)
+    {
+        return RecordManager.GetRecord(Const.EventColorConfig, processesName, "0");
+    }
 
     #endregion
 }
