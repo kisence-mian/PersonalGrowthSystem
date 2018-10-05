@@ -15,7 +15,7 @@ public class RecordTime
     {
         GoogleCalendar.LoadCredential();
 
-        TimerTask(null, null);
+        GoogleCalendar.Report(DateTime.Now, "程序启动", "", 1);
     }
 
     //每10分钟执行一次
@@ -34,9 +34,7 @@ public class RecordTime
         }
 
         //屏幕截屏
-        ScreenShot.ShotAll(RecordManager.GetRecord(Const.ConfigFile, Const.Config_ShotPosition, ".\\ScreenShot"));
-
-
+        ScreenShot.ShotAll(Config.GetConfig<ConfigData>().ShotPosition);
     }
 
     #region 分析进程

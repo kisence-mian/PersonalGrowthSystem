@@ -41,6 +41,8 @@ namespace PersonalGrowthSystem
             {
                 System.Windows.MessageBox.Show(e.ToString());
             }
+
+            Topmost = true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -58,8 +60,8 @@ namespace PersonalGrowthSystem
         /// <param name="time">时间 单位是毫秒</param>
         public static void Notify(string description,int time)
         {
-            MainWindow.notifyIcon.BalloonTipText = description;  //设置程序启动时显示的文本
-            MainWindow.notifyIcon.ShowBalloonTip(time);
+            notifyIcon.BalloonTipText = description;  //设置程序启动时显示的文本
+            notifyIcon.ShowBalloonTip(time);
         }
 
         private void InitIcon()
@@ -78,9 +80,15 @@ namespace PersonalGrowthSystem
 
         private void OnNotifyIconDoubleClick(object sender, EventArgs e)
         {
-            this.Show();
-            WindowState = wsl;
-           
+            if(WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Minimized;
+            }
+            else
+            {
+                Show();
+                WindowState = wsl;
+            }
         }
 
         private void Window_StateChanged(object sender, EventArgs e)
@@ -89,7 +97,7 @@ namespace PersonalGrowthSystem
 
             if (ws == WindowState.Minimized)
             {
-                this.Hide();
+                Hide();
             }
 
         }

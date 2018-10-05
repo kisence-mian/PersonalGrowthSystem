@@ -3,6 +3,7 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using PersonalGrowthSystem;
 using PersonalGrowthSystem.Src.Util;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ using System.Windows;
 
 public class GoogleCalendar
 {
+    static public bool isInit = false;
+
     static string[] Scopes = { CalendarService.Scope.Calendar };
     static string ApplicationName = "PersonalGrowthSystem";//PersonalGrowthSystem
 
@@ -32,40 +35,47 @@ public class GoogleCalendar
     {
         try
         {
-            string credentialPath = GetCredentialPath();
-
-            using (var stream =
-                   new FileStream(credentialPath, FileMode.Open, FileAccess.Read))
+            if (!isInit)
             {
-                string credPath = System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, ".credentials/PersonalGrowthSystem-Calendar.json");
+                string credentialPath = GetCredentialPath();
 
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
+                using (var stream =
+                       new FileStream(credentialPath, FileMode.Open, FileAccess.Read))
+                {
+                    string credPath = System.Environment.GetFolderPath(
+                        System.Environment.SpecialFolder.Personal);
+                    credPath = Path.Combine(credPath, ".credentials/PersonalGrowthSystem-Calendar.json");
+
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                    Console.WriteLine("Credential file saved to: " + credPath);
+                }
+
+                // Create Google Calendar API service.
+                service = new CalendarService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName,
+                });
+
+                isInit = true;
             }
-
-            // Create Google Calendar API service.
-            service = new CalendarService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
-            });
         }
-        catch
+        catch(Exception e)
         {
-
+            //MessageBox.Show(e.ToString());
         }
     }
 
     public static void Report(DateTime date,string name,string description ,int minutes)
     {
-        if(service != null)
+        LoadCredential();
+
+        if (service != null)
         {
             try
             {
@@ -100,7 +110,7 @@ public class GoogleCalendar
         }
         else
         {
-            MessageBox.Show("Google 服务未启动");
+            MainWindow.Notify("ERROR: Google 服务未启动", 1000);
         }
     }
 

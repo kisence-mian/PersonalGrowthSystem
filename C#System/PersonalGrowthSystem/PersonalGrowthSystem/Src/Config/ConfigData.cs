@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 public class ConfigData
 {
     public bool isStartRun;
-    public string shotPosition;
+    public string shotPosition = PathTool.GetStartupPath() + "/Shot";
     public string location;
     public string credentialsPath;
     public string screenShotPath;
@@ -48,20 +48,19 @@ public class ConfigData
         set
         {
             credentialsPath = value;
-            RecordManager.GetRecord(
-            Const.GoogleCalendarConfig,
-            Const.Google_CredentialsPath, credentialsPath);
+            RecordManager.SaveRecord(Const.GoogleCalendarConfig,Const.Google_CredentialsPath, credentialsPath);
             Save();
         }
     }
 
     public string ScreenShotPath
 
-    { get => screenShotPath;
+    {
+        get => screenShotPath;
         set
         {
             screenShotPath = value;
-            RecordManager.SaveRecord(Const.ConfigFile, Const.Config_ShotPosition, screenShotPath);
+            //RecordManager.SaveRecord(Const.ConfigFile, Const.Config_ShotPosition, screenShotPath);
             Save();
         }
     }

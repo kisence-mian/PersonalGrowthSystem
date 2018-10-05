@@ -41,6 +41,7 @@ namespace PersonalGrowthSystem.Src.UI
             if (result == true)
             {
                 this.Text_Path.Text = openFileDialog.FileName;
+                cData.CredentialsPath = this.Text_Path.Text;
             }
         }
 
@@ -78,6 +79,7 @@ namespace PersonalGrowthSystem.Src.UI
             if (result == CommonFileDialogResult.Ok)
             {
                 this.Text_ShotPath.Text = dialog.FileName;
+                cData.ShotPosition = this.Text_ShotPath.Text;
             }
         }
     }

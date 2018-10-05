@@ -10,7 +10,7 @@ public class ScreenShot
 {
     public static void ShotAll(string path)
     {
-        string name = "ScreenShot" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        string name = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         int offset = 0;
         for (int i = 0; i < Screen.AllScreens.Length; i++)
         {
