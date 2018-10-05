@@ -24,7 +24,7 @@ namespace PersonalGrowthSystem.Src.UI
             InitializeComponent();
 
             ConfigData cData = Config.GetConfig<ConfigData>();
-            GoogleCalendarConfig gData = Config.GetConfig<GoogleCalendarConfig>();
+            //GoogleCalendarConfig gData = Config.GetConfig<GoogleCalendarConfig>();
 
             DataContext = cData;
         }

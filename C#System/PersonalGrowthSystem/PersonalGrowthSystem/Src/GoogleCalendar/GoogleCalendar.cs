@@ -63,14 +63,21 @@ public class GoogleCalendar
         }
     }
 
-    public static void Report(DateTime date,string name,int minutes)
+    public static void Report(DateTime date,string name,string description ,int minutes)
     {
         if(service != null)
         {
             try
             {
+                Colors cs = new Colors();
+                ColorDefinition c = new ColorDefinition();
+
+                
                 Event e = new Event();
                 e.Summary = name;
+                e.Description = description;
+                //e.ColorId = color;
+
                 e.Location = RecordManager.GetRecord(Const.GoogleCalendarConfig, Const.Google_Location, "XXX");
 
                 EventDateTime start = new EventDateTime();

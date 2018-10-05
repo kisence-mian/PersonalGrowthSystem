@@ -9,7 +9,6 @@
         StateChanged="Window_StateChanged"
         Title="个人成长系统" Height="602" Width="238">
     <Grid>
-        <Button Content="设置" HorizontalAlignment="Left" Margin="432,290,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-
+        <Button Content="设置" Margin="10,0,10,10" Click="Button_Click" Height="19" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

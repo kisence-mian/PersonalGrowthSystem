@@ -5,12 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalGrowthSystem.Src.UI"
         mc:Ignorable="d"
-        Title="设置" Height="300" Width="328.272">
+        Title="设置" Height="303" Width="509.272">
     <Grid x:Name="Grid_Window" >
-        <Label Content="Google日历密钥" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Text_Path" Height="21" Margin="115,12,85,0" TextWrapping="Wrap" Text="{Binding Path=CredentialsPath, Mode=TwoWay}" VerticalAlignment="Top"/>
-        <Button Content="选择" Margin="240,14,5,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <CheckBox Content="开机启动" Checked="CheckBox_Checked" IsChecked="{Binding Path=IsStartRun, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+
+        <TabControl HorizontalAlignment="Stretch" Margin="2,2,2,2" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="2,2,2,2" VerticalContentAlignment="Stretch">
+            <TabItem Header="常规">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
+
+                    <CheckBox Content="开机启动" Checked="CheckBox_Checked" IsChecked="{Binding Path=IsStartRun, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" Height="15" VerticalAlignment="Top"/>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="上报设置">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Google日历密钥" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="Text_Path" Height="21" Margin="115,12,85,0" TextWrapping="Wrap" Text="{Binding Path=CredentialsPath, Mode=TwoWay}" VerticalAlignment="Top"/>
+                    <Button Content="选择" Margin="0,14,5,0" VerticalAlignment="Top" Click="Button_Click" HorizontalAlignment="Right" Width="75"/>
+
+                    <Label Content="当前地址" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="Text_Path2" Height="21" Margin="115,42,85,0" TextWrapping="Wrap" Text="{Binding Path=Location, Mode=TwoWay}" VerticalAlignment="Top"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

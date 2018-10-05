@@ -67,8 +67,7 @@ namespace PersonalGrowthSystem
         {
             this.Show();
             WindowState = wsl;
-
-            Topmost = true;
+           
         }
 
         private void Window_StateChanged(object sender, EventArgs e)
@@ -86,14 +85,17 @@ namespace PersonalGrowthSystem
 
         #region 时间记录
 
+        System.Timers.Timer timer;
+
         void TimeRecord()
         {
             RecordTime rt = new RecordTime();
 
-            var timer2 = new System.Timers.Timer(10 * 60 * 1000);//10分钟
-            timer2.AutoReset = true;//AutoReset 属性为 true 时，每隔指定时间循环一次；如果为 false，则只执行一次。
-            timer2.Enabled = true;
-            timer2.Elapsed += new System.Timers.ElapsedEventHandler(rt.TimerTask);
+            timer = new System.Timers.Timer(10 * 60 * 1000);//10分钟
+            timer.AutoReset = true;//AutoReset 属性为 true 时，每隔指定时间循环一次；如果为 false，则只执行一次。
+            timer.Enabled = true;
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(rt.TimerTask);
+            timer.Start();
         }
 
         #endregion

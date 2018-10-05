@@ -9,6 +9,8 @@ public class ConfigData
 {
     public bool isStartRun;
     public string shotPosition;
+    public string location;
+    public string credentialsPath;
 
     public bool IsStartRun
     {
@@ -18,15 +20,42 @@ public class ConfigData
             Save();
         }
     }
-    public string ShotPosition {
+    public string ShotPosition
+    {
         get => shotPosition;
-        set { shotPosition = value;
+        set {
+            shotPosition = value;
+            Save();
+        }
+    }
+
+    public string Location
+    {
+        get => location;
+        set
+        { 
+            location = value;
+            RecordManager.SaveRecord(Const.GoogleCalendarConfig, Const.Google_Location, location);
+            Save();
+        }
+    }
+
+    public string CredentialsPath
+    {
+        get => credentialsPath;
+
+        set
+        {
+            credentialsPath = value;
+            RecordManager.GetRecord(
+            Const.GoogleCalendarConfig,
+            Const.Google_CredentialsPath, credentialsPath);
             Save();
         }
     }
 
     public void Save()
     {
-        Config.SaveConfig<ConfigData>(this);
+        Config.SaveConfig(this);
     }
 }
