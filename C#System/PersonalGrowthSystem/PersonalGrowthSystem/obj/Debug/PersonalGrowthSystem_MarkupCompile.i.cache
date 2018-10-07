@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\App.xaml
-21568576310
+3-1622393221
 2-235852714
-25-586973451
+26-1217239987
 87-242674499
-MainWindow.xaml;Src\UI\SettingWindow.xaml;
+MainWindow.xaml;Src\UI\ReportWindow.xaml;Src\UI\SettingWindow.xaml;
 
-True
+False
 

@@ -63,3 +63,5 @@ G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSyst
 G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\bin\Debug\Res\Icon.ico
 G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\bin\Debug\Microsoft.WindowsAPICodePack.dll
 G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\obj\Debug\Src\UI\ReportWindow.g.cs
+G:\Project\PersonalGrowthSystem\C#System\PersonalGrowthSystem\PersonalGrowthSystem\obj\Debug\Src\UI\ReportWindow.baml

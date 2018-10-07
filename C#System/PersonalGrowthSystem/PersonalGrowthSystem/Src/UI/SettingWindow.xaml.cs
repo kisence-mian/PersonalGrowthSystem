@@ -34,13 +34,7 @@ namespace PersonalGrowthSystem.Src.UI
 
             eventColor = RecordManager.GetRecordData(Const.EventColorConfig);
 
-            RecordManager.SaveRecord(Const.EventColorConfig, "dev", "0");
-            RecordManager.SaveRecord(Const.EventColorConfig, "apk", "1");
-            RecordManager.SaveRecord(Const.EventColorConfig, "steam", "2");
-
             List_EventColor.ItemsSource = eventColor;
-            //List_EventColor.DisplayMemberPath = "Value";
-            //List_EventColor.SelectedValuePath = "Key";
         }
 
         #region 开机启动

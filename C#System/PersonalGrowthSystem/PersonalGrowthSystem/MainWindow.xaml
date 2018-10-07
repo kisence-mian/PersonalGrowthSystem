@@ -10,6 +10,7 @@
         ResizeMode= "CanMinimize"
         Height="602" Width="238">
     <Grid>
+        <Button Content="主动上报" Margin="10,0,10,34" Click="Button_Click_Report" Height="19" VerticalAlignment="Bottom"/>
         <Button Content="设置" Margin="10,0,10,10" Click="Button_Click" Height="19" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

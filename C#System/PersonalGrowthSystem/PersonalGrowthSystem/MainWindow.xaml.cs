@@ -45,10 +45,22 @@ namespace PersonalGrowthSystem
             Topmost = true;
         }
 
+        //点击设置按钮
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SettingWindow window = new SettingWindow();
             window.ShowDialog();
+        }
+
+        //主动上报
+        private void Button_Click_Report(object sender, RoutedEventArgs e)
+        {
+            Topmost = false
+                ;
+            ReportWindow window = new ReportWindow();
+            window.ShowDialog();
+
+            Topmost = true;
         }
 
         #region 任务栏小图标
@@ -106,11 +118,12 @@ namespace PersonalGrowthSystem
 
         #region 时间记录
 
-        System.Timers.Timer timer;
+        static System.Timers.Timer timer;
+        RecordTime rt;
 
         void TimeRecord()
         {
-            RecordTime rt = new RecordTime();
+            rt = new RecordTime();
 
             timer = new System.Timers.Timer(10 * 60 * 1000);//10分钟
             timer.AutoReset = true;//AutoReset 属性为 true 时，每隔指定时间循环一次；如果为 false，则只执行一次。
@@ -119,6 +132,23 @@ namespace PersonalGrowthSystem
             timer.Start();
         }
 
+        public static void Report(string title,string description,int minute,string colorID = "0")
+        {
+            GoogleCalendar.Report(DateTime.Now, title, description, minute, colorID);
+        }
+
+        public static void PauseTimer()
+        {
+            timer.Stop();
+        }
+
+        public static void StartTimer()
+        {
+            timer.Start();
+        }
+
         #endregion
+
+
     }
 }
