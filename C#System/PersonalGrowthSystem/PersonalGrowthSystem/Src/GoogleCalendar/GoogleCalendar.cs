@@ -111,7 +111,7 @@ public class GoogleCalendar
         }
         else
         {
-            MainWindow.Notify("ERROR: Google 服务未启动", 1000);
+            MainWindow.Notify("ERROR: Google 服务未启动");
         }
     }
 

@@ -26,7 +26,7 @@ public class RecordTime
         if(processes != null)
         {
             GoogleCalendar.Report(DateTime.Now, processes.ProcessName, processes.MainWindowTitle, 10,GetEventColor(processes.ProcessName));
-            MainWindow.Notify("已上报 ->" + processes.ProcessName, 1000);
+            MainWindow.Notify("已上报 ->" + processes.ProcessName);
         }
         else
         {

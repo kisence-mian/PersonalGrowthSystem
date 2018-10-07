@@ -28,6 +28,7 @@ namespace PersonalGrowthSystem.Src.UI
         //定义Timer类
         System.Timers.Timer timer;
         int timerCount = 0;
+        DateTime startTime;
 
         #region 跑步
 
@@ -41,7 +42,8 @@ namespace PersonalGrowthSystem.Src.UI
                 if (Text_distance.Text != "")
                 {
                     MainWindow.StartTimer();
-                    MainWindow.Report("跑步", "里程: " + Text_distance.Text, GetMinute(), "2");
+                    MainWindow.Report(startTime,"跑步", "里程: " + Text_distance.Text, GetMinute(), "2");
+                    MainWindow.Notify("跑步上报成功 里程" + Text_distance.Text + " 分钟 " + GetMinute());
                     EndTimer();
 
                     isRun = false;
@@ -58,6 +60,7 @@ namespace PersonalGrowthSystem.Src.UI
 
                 isRun = true;
                 Button_run.Content = "停止跑步";
+                startTime = DateTime.Now;
             }
         }
 
@@ -75,7 +78,8 @@ namespace PersonalGrowthSystem.Src.UI
                 if (Text_BookName.Text != "")
                 {
                     MainWindow.StartTimer();
-                    MainWindow.Report("读书", "书名: " + Text_BookName.Text, GetMinute(), "1");
+                    MainWindow.Report(startTime, "读书", "书名: " + Text_BookName.Text, GetMinute(), "1");
+                    MainWindow.Notify("读书上报成功 书名: " + Text_BookName.Text + " 分钟 " + GetMinute());
                     EndTimer();
 
                     isRead = false;
@@ -91,6 +95,7 @@ namespace PersonalGrowthSystem.Src.UI
 
                 isRead = true;
                 Button_read.Content = "停止读书";
+                startTime = DateTime.Now;
             }
         }
 
@@ -106,7 +111,8 @@ namespace PersonalGrowthSystem.Src.UI
             if (isGuitar)
             {
                 MainWindow.StartTimer();
-                MainWindow.Report("练琴", "", GetMinute(), "6");
+                MainWindow.Report(startTime, "练琴", "", GetMinute(), "6");
+                MainWindow.Notify("练琴上报成功 分钟 " + GetMinute());
                 EndTimer();
 
                 isGuitar = false;
@@ -121,6 +127,39 @@ namespace PersonalGrowthSystem.Src.UI
 
                 isGuitar = true;
                 Button_read.Content = "停止读书";
+                startTime = DateTime.Now;
+            }
+        }
+
+        #endregion
+
+        #region 自定义内容
+
+        bool isCustom = false;
+
+        private void Button_Custom_Click(object sender, RoutedEventArgs e)
+        {
+            if (isCustom)
+            {
+                if(Text_customTitle.Text !="")
+                MainWindow.StartTimer();
+                MainWindow.Report(startTime, Text_customTitle.Text, Text_description.Text, GetMinute(), "6");
+                MainWindow.Notify(Text_customTitle.Text + "上报成功 分钟 " + GetMinute());
+                EndTimer();
+
+                isCustom = false;
+                Button_read.Content = "开始";
+            }
+            //开始练琴
+            else
+            {
+                MainWindow.PauseTimer();
+
+                StartTimer();
+
+                isCustom = true;
+                Button_read.Content = "停止";
+                startTime = DateTime.Now;
             }
         }
 
@@ -180,6 +219,7 @@ namespace PersonalGrowthSystem.Src.UI
         {
             return timerCount / 60;
         }
+
 
 
         #endregion

@@ -70,10 +70,10 @@ namespace PersonalGrowthSystem
         /// </summary>
         /// <param name="description">内容</param>
         /// <param name="time">时间 单位是毫秒</param>
-        public static void Notify(string description,int time)
+        public static void Notify(string description)
         {
             notifyIcon.BalloonTipText = description;  //设置程序启动时显示的文本
-            notifyIcon.ShowBalloonTip(time);
+            notifyIcon.ShowBalloonTip(1000);
         }
 
         private void InitIcon()
@@ -132,9 +132,9 @@ namespace PersonalGrowthSystem
             timer.Start();
         }
 
-        public static void Report(string title,string description,int minute,string colorID = "0")
+        public static void Report(DateTime startTime,string title,string description,int minute,string colorID = "0")
         {
-            GoogleCalendar.Report(DateTime.Now, title, description, minute, colorID);
+            GoogleCalendar.Report(startTime, title, description, minute, colorID);
         }
 
         public static void PauseTimer()
