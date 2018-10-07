@@ -22,6 +22,8 @@ namespace PersonalGrowthSystem.Src.UI
         public ReportWindow()
         {
             InitializeComponent();
+
+            Topmost = true;
         }
         bool isReport = false; //正在上报
 
@@ -111,7 +113,7 @@ namespace PersonalGrowthSystem.Src.UI
             if (isGuitar)
             {
                 MainWindow.StartTimer();
-                MainWindow.Report(startTime, "练琴", "", GetMinute(), "6");
+                MainWindow.Report(startTime, "练琴", "", GetMinute(), "9");
                 MainWindow.Notify("练琴上报成功 分钟 " + GetMinute());
                 EndTimer();
 
@@ -143,12 +145,12 @@ namespace PersonalGrowthSystem.Src.UI
             {
                 if(Text_customTitle.Text !="")
                 MainWindow.StartTimer();
-                MainWindow.Report(startTime, Text_customTitle.Text, Text_description.Text, GetMinute(), "6");
+                MainWindow.Report(startTime, Text_customTitle.Text, Text_description.Text, GetMinute(), "8");
                 MainWindow.Notify(Text_customTitle.Text + "上报成功 分钟 " + GetMinute());
                 EndTimer();
 
                 isCustom = false;
-                Button_read.Content = "开始";
+                Button_Custom.Content = "开始";
             }
             //开始练琴
             else
@@ -158,7 +160,7 @@ namespace PersonalGrowthSystem.Src.UI
                 StartTimer();
 
                 isCustom = true;
-                Button_read.Content = "停止";
+                Button_Custom.Content = "停止";
                 startTime = DateTime.Now;
             }
         }
